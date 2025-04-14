@@ -15,7 +15,7 @@ def before_request():
     pass
 
 # Configuración para la subida de imágenes
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif','jfif','webp','bmp'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif','jfif','webp','bmp','ico'}
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'app', 'static', 'imagenes')  # Ruta absoluta
 
 # Verificar que la carpeta existe, si no, crearla
@@ -93,7 +93,7 @@ def add():
             db.session.commit()
             flash(f"✅ Registro Guardado: ")
         except:
-            print("Error en la base de datos")
+            print("Error en la base de datos add productos")
         return redirect(url_for('productos.index'))
     catdata= Categorias.query.all()
     return render_template('productos/add.html',catdata=catdata,)
@@ -124,7 +124,7 @@ def edit(id):
             db.session.commit()
             flash(f"✅ Registro Actualizado: ")
         except:
-            print("Error en la base de datos")
+            print("Error en la base de datos edit productos")
         return redirect(url_for('productos.index'))
 
     categorias= Categorias.query.all() 
@@ -146,5 +146,5 @@ def delete(id):
         db.session.commit()
         flash("✅ Producto eliminado con éxito", "success")
     except:
-        print("Error en la base de datos")
+        print("Error en la base de datos Eliminar Producto")
     return redirect(url_for('productos.index'))

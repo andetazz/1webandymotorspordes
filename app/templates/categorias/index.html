@@ -3,26 +3,73 @@
 {% block content %}
 <a class="btn btn-primary btn-sm mb-1" href="{{ url_for('categorias.add') }}">Agregar Categoria</a>
 <a class="btn btn-sm btn-success mb-1" href="{{ url_for('auth.dashboard') }}">Regresar</a>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>nombre</th>
-        <th>img</th>
-    </tr>
-    {% for categoria in data %}
-    <tr>
-        <td>{{ categoria.idcategoria }}</td>
-        <td>{{ categoria.nombre }}</td>
-        <td>{{ categoria.img1 }}</td>
-        <td>
-            <a href="{{ url_for('categorias.edit', id=categoria.idcategoria) }}">Editar</a>
-            <a href="{{ url_for('categorias.delete', id=categoria.idcategoria) }}">Eliminar</a>
-            {# <a href="{{ url_for('departamentos.list', id=depart.idDepartment) }}">Listar empleados</a>
-            #}
-            <!-- Agrega aquí el enlace para eliminar -->
+<!-- Aquí agregamos el contenedor responsive -->
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <tr>
+            <th>imgen</th>
+            <th>ID</th>
+            <th>nombre</th>
+        </tr>
+        {% for categoria in data %}
+        <tr>
+            <td>
+                <img src="{{ url_for('static', filename='imagenes/' + categoria.get_img('img1')) }}"
+                     style="max-width: 100px; max-height: 100px; border: 2px solid #3f88c5 ; object-fit: contain; border-radius: 5px;"
+                     alt="Imagen de la Categoria">
+            </td>
+            <td>{{ categoria.idcategoria }}</td>
+            <td>{{ categoria.nombre }}</td>
+            <td>
 
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+                <div class="d-flex gap-2">
+                    <a href="{{ url_for('categorias.edit', id=categoria.idcategoria) }}" class="btn btn-sm btn-custom-orange flex-fill mb-1">Editar</a>
+                    <a href="javascript:void(0);"
+                       onclick="confirmarEliminacion('{{ categoria.idcategoria }}');"
+                       class="btn btn-sm btn-danger flex-fill mb-1">Eliminar</a>
+                </div>
+                {# <a href="{{ url_for('departamentos.list', id=depart.idDepartment) }}">Listar empleados</a>
+                #}
+                <!-- Agrega aquí el enlace para eliminar -->
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<script>
+    function confirmarEliminacion(idProducto) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción eliminará el producto permanentemente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#3498db',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/productos/delete/${idProducto}`;
+            }
+        });
+    }
+</script><script>
+    function confirmarEliminacion(idProducto) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción eliminará la Categoria permanentemente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e74c3c',
+            cancelButtonColor: '#3498db',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/categorias/delete/${idProducto}`;
+            }
+        });
+    }
+</script>
 {% endblock %}

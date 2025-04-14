@@ -12,4 +12,4 @@ class Categorias(db.Model):
         return str(self.idcategoria)
     
     def get_img(self, img_attr):
-        return getattr(self, img_attr) if getattr(self, img_attr) else "usuario.gif"
+        return getattr(self, img_attr) if getattr(self, img_attr) else "categoria.png"

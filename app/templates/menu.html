@@ -2,7 +2,8 @@
     /* Fondo del navbar completo */
     .navbar {
         background-color: #032b43 !important;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil debajo del navbar */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        /* Sombra sutil debajo del navbar */
     }
 
     /* Estilo para cada ítem del menú */
@@ -14,22 +15,33 @@
         border: none;
         border-radius: 8px;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Sombras individuales */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        /* Sombras individuales */
     }
 
     /* Hover para los ítems */
     .nav-link.btn:hover {
         background-color: #2c6ba2 !important;
-        transform: translateY(-2px); /* Efecto levitar al pasar el mouse */
+        transform: translateY(-2px);
+        /* Efecto levitar al pasar el mouse */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
     }
 
     /* Animación cuando el ítem tiene focus */
     @keyframes cambioColor {
-        0% { background-color: #3f88c5; }
-        50% { background-color: #67b5f5; }
-        100% { background-color: #3f88c5; }
+        0% {
+            background-color: #3f88c5;
+        }
+
+        50% {
+            background-color: #67b5f5;
+        }
+
+        100% {
+            background-color: #3f88c5;
+        }
     }
+
     @media (max-width: 991px) {
         .nav-link.btn {
             display: flex;
@@ -37,16 +49,18 @@
             justify-content: center;
         }
     }
+
     .nav-link:focus {
         animation: cambioColor 1s infinite;
     }
 
     /* Imagen redonda con sombra */
     .rounded-circle {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-     /* Íconos en los botones de menú */
-     .nav-link i {
+
+    /* Íconos en los botones de menú */
+    .nav-link i {
         margin-right: 8px;
         transition: transform 0.3s ease, color 0.3s ease;
     }
@@ -54,7 +68,8 @@
     /* Animación al hacer hover en el botón */
     .nav-link:hover i {
         transform: scale(1.2) rotate(-5deg);
-        color: #ffdd00; /* Color vibrante para destacar al pasar el mouse */
+        color: #ffdd00;
+        /* Color vibrante para destacar al pasar el mouse */
     }
 
     /* Para cerrar sesión también */
@@ -67,14 +82,17 @@
         transform: scale(1.2) rotate(5deg);
         color: #f0f0f0;
     }
+
     /* Efecto de latido (pulse) */
     @keyframes pulseIcon {
         0% {
             transform: scale(1);
         }
+
         50% {
             transform: scale(1.2);
         }
+
         100% {
             transform: scale(1);
         }
@@ -87,10 +105,18 @@
         animation: pulseIcon 0.6s ease-in-out;
         color: #ffdd00;
     }
+
     /* Efecto de parpadeo sutil */
     @keyframes blinkIcon {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.4; }
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.4;
+        }
     }
 
     /* Aplica el parpadeo solo a íconos especiales (ej: carrito) */
@@ -100,17 +126,18 @@
 </style>
 
 <!-- Menú de Navegación -->
-<nav class="navbar navbar-expand-lg navbar-dark" >
-    <div class="container-fluid">
-        <a class="navbar-brand">ComPuMoTos</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav me-auto">
-               <!-- tipousu = administrador -->
-                {% if datausu.tipousu == 1 %} 
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top"" >
+    <nav class=" navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">ComPuMoTos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto">
+                    <!-- tipousu = administrador -->
+                    {% if datausu.tipousu == 1 %}
                     <!-- Usuarios -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle btn btn-primary" href="#" id="navbarUsuarios" role="button"
@@ -121,7 +148,7 @@
                             <li><a class="dropdown-item" href="{{ url_for('users.index') }}">Listado</a></li>
                             <li><a class="dropdown-item" href="{{ url_for('users.add') }}">Agregar</a></li>
                         </ul>
-                    </li>               
+                    </li>
                     <!-- Categorías -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle btn btn-primary" href="#" id="navbarCategorias" role="button"
@@ -144,44 +171,43 @@
                             <li><a class="dropdown-item" href="{{ url_for('productos.add') }}">Agregar</a></li>
                         </ul>
                     </li>
-                {% endif %}
-                <!-- Carrito -->
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary carrito" href="{{ url_for('carrito.listarcarrito') }}">
-                        <i class="bi bi-cart-fill"></i> Carrito
-                     </a>
-                   
-                </li>
-                <!-- Compras Realizadas -->
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary" href="{{ url_for('carrito.vercompras') }}">
-                        <i class="bi bi-bag-check-fill"></i> Compras Realizadas
+                    {% endif %}
+                    <!-- Carrito -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary carrito" href="{{ url_for('carrito.listarcarrito') }}">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+
+                    </li>
+                    <!-- Compras Realizadas -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="{{ url_for('carrito.vercompras') }}">
+                            <i class="bi bi-bag-check-fill"></i> Compras Realizadas
+                        </a>
+                    </li>
+                    <!-- Acerca de -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="#">
+                            <i class="bi bi-info-circle-fill"></i> Acerca de...
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Foto de Perfil y Cerrar Sesión -->
+                <div class="d-flex align-items-center">
+                    {% if datausu.imgper %}
+                    <img src="{{ url_for('static', filename='imagenes/' + datausu.imgper) }}"
+                        alt="Foto de {{ datausu.nameuser }}" class="rounded-circle me-2" width="50" height="50">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='imagenes/usuario.bmp') }}" alt="Imagen por defecto"
+                        class="rounded-circle me-2" width="50" height="50">
+                    {% endif %}
+                    <span class="text-white me-3">Usuario: {{ datausu.nameuser }}</span>
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-danger btn-danger">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar sesión
                     </a>
-                </li>
-                <!-- Acerca de -->
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary" href="#">
-                        <i class="bi bi-info-circle-fill"></i> Acerca de...
-                    </a>
-                </li>
-            </ul>
-        
-            <!-- Foto de Perfil y Cerrar Sesión -->
-            <div class="d-flex align-items-center">
-                {% if datausu.imgper %}
-                <img src="{{ url_for('static', filename='imagenes/' + datausu.imgper) }}" 
-                    alt="Foto de {{ datausu.nameuser }}" class="rounded-circle me-2" width="50" height="50">
-                {% else %}
-                <img src="{{ url_for('static', filename='imagenes/usuario.bmp') }}" 
-                    alt="Imagen por defecto" class="rounded-circle me-2" width="50" height="50">
-                {% endif %}
-                <span class="text-white me-3">Usuario: {{ datausu.nameuser }}</span>
-                <a href="{{ url_for('auth.logout') }}" class="btn btn-danger btn-danger">
-                    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-                </a>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 </nav>
-
-

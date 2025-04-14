@@ -34,7 +34,8 @@ def login():
 @bp.route('/dashboard')
 @login_required
 def dashboard(): 
-    users = Users.query.all() 
+    #users = Users.query.first()
+    users = Users.query.filter_by(iduser=current_user.iduser).first()
     dataprod = Productos.query.all() 
     datacategorias = Categorias.query.all()
     print(datacategorias) 
