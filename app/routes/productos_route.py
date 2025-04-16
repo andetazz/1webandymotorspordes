@@ -65,8 +65,8 @@ def index():
     datacategorias = Categorias.query.all()
     print(datacategorias)
     return render_template('productos/index.html', data=data,datausu=current_user,datacategorias=datacategorias)
-@bp.route('/productos/add', methods=['GET', 'POST'])
 
+@bp.route('/productos/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
         
